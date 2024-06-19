@@ -5,14 +5,9 @@ deploy:
   stage: deploy
   script:
     - apt-get update && apt-get install -y awscli
-    - mkdir -p ~/.aws
-    - echo "[default]" > ~/.aws/credentials
-    - echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
-    - echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
-    - echo "[default]" > ~/.aws/config
-    - echo "region = us-east-1" >> ~/.aws/config
-    - cat ~/.aws/credentials
-    - cat ~/.aws/config
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set default.region us-east-1
     - aws s3 sync ./static-site s3://static-web-site-bohdan
     - aws cloudfront create-invalidation --distribution-id $YOUR_DISTRIBUTION_ID --paths "/*"
   only:
