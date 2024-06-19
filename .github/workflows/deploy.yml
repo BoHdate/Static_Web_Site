@@ -26,7 +26,7 @@ jobs:
 
       - name: Sync S3 Bucket
         run: |
-          aws s3 sync . s3://static-web-site-bohdan --delete --exclude ".git/*" --exclude ".gitlab-ci.yml"
+          aws s3 sync . s3://github-web-static1488 --delete --exclude ".git/*" --exclude ".github/*"
 
       - name: Create CloudFront invalidation
         run: |
