@@ -8,8 +8,6 @@ deploy:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set default.region us-east-1
-    - echo "Checking if ./static-site exists and is not empty:"
-    - ls -al ./Static_WebSite
     - aws s3 sync ./Static_WebSite s3://static-web-site-bohdan
     - aws cloudfront create-invalidation --distribution-id $YOUR_DISTRIBUTION_ID --paths "/*"
   only:
