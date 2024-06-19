@@ -8,7 +8,7 @@ deploy:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set default.region us-east-1
-    - aws s3 sync . s3://static-web-site-bohdan --delete --exclude ".gitlab-ci.yml" --exclude ".git/*"
+    - aws s3 sync . s3://static-web-site-bohdan --delete --exclude ".git/*" --exclude ".gitlab-ci.yml" --include "*"
     - aws cloudfront create-invalidation --distribution-id $YOUR_DISTRIBUTION_ID --paths "/*"
   only:
     - main
